@@ -12,6 +12,7 @@ using namespace std;
 bool isSortedIncreasing(int values[], const int size);		//This prototype sets up a boolean function
 bool isSortedDecreasing(int values[], const int size);		//This prototype sets up another boolean function
 bool hasAdjacentDuplicates(int values[], const int size);	//This prototype sets a boolean to check for adjacent duplicates
+bool hasDuplicates(int values[], const int size);		//This sets up a function to detect for duplicate values
 
 int main() {
 	const int ARRAYSIZE = 6;	//This sets the size of the array
@@ -19,7 +20,7 @@ int main() {
 	bool increasing = true;		//This initializes the boolean we use with the isSortedIncreasing function
 	bool decreasing = true;		//This initializes the boolean we use with the isSortedDecreasing function
 	bool adjacentDuplicates = true;	//This sets the boolean used with hasAdjacentDuplicates
-
+	bool duplicates = true;		//This sets the boolean used to store the duplicates check
 	for (int x = 0; x < ARRAYSIZE; x++) {		//This loop gets the user to input each index of the array
 		cout << "Enter integer #" << x << ": ";
 		cin >> numbers[x];
@@ -49,6 +50,16 @@ int main() {
 		cout << "The data does not have adjacent duplicates. " << endl;
 	}
 
+	duplicates = hasDuplicates(numbers, ARRAYSIZE);		//This runs the function
+	if (duplicates == true) {				//If it's true, it outputs that there is duplicates
+		cout << "The data has duplicates. " << endl;
+	}
+	else {							//Otherwise, there are no duplicates, so it says that
+		cout << "The data does not have duplicates." << endl;
+	}
+	cout << "Press any key to continue . . .";			
+	
+
 	return 0;
 }
 
@@ -77,4 +88,16 @@ bool hasAdjacentDuplicates(int values[], int size) {		//This part actually defin
 		}
 	}
 	return false;			//This goes after the for loop, because if it makes it through the for loop without returning true, then it must be false.
+}
+
+bool hasDuplicates(int values[], int size) {
+	for (int j = 0; j < size; j++) {			//This for loop runs through each value in the array, including 0 this time
+		for (int k = (j + 1); k < size; k++) {			//This for loop runs through each value above the one in the previous for loop
+			if (values[j] == values[k]) {				//If it finds that the value selected in the for loop is equal to any other value, it returns true
+				return true;
+			}
+
+		}
+	}
+	return false;		//If it reaches this point, none are equal, so it's false
 }
