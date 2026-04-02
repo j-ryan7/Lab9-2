@@ -11,12 +11,14 @@ using namespace std;
 
 bool isSortedIncreasing(int values[], const int size);		//This prototype sets up a boolean function
 bool isSortedDecreasing(int values[], const int size);		//This prototype sets up another boolean function
+bool hasAdjacentDuplicates(int values[], const int size);	//This prototype sets a boolean to check for adjacent duplicates
 
 int main() {
 	const int ARRAYSIZE = 6;	//This sets the size of the array
 	int numbers[ARRAYSIZE];		//This initializes the array
 	bool increasing = true;		//This initializes the boolean we use with the isSortedIncreasing function
 	bool decreasing = true;		//This initializes the boolean we use with the isSortedDecreasing function
+	bool adjacentDuplicates = true;	//This sets the boolean used with hasAdjacentDuplicates
 
 	for (int x = 0; x < ARRAYSIZE; x++) {		//This loop gets the user to input each index of the array
 		cout << "Enter integer #" << x << ": ";
@@ -39,6 +41,14 @@ int main() {
 		cout << "The data are not decreasing. " << endl;
 	}
 
+	adjacentDuplicates = hasAdjacentDuplicates(numbers, ARRAYSIZE);	//This runs the function
+	if (adjacentDuplicates == true) {				//If the function is true, then it outputs that there are adjacent duplicates
+		cout << "The data has adjacent duplicates." << endl;	
+	}
+	else {						//Otherwise it is false, so it outputs that there aren't adjacent duplicates
+		cout << "The data does not have adjacent duplicates. " << endl;
+	}
+
 	return 0;
 }
 
@@ -52,10 +62,19 @@ bool isSortedIncreasing(int values[], int size) {		//This part actually defines 
 }
 
 bool isSortedDecreasing(int values[], int size) {		//This part actually defines the function
-	for (int y = 1; y < size; y++) {			//This for loop runs through each value in the array. It starts at 1 because otherwise, element 0 would be compared to element -1, which doesn't exist.
-		if (values[y] > values[(y - 1)]) {		//If one element of the array is greater than the value before it, then it's not decreasing.
+	for (int z = 1; z < size; z++) {			//This for loop runs through each value in the array. It starts at 1 because otherwise, element 0 would be compared to element -1, which doesn't exist.
+		if (values[z] > values[(z - 1)]) {		//If one element of the array is greater than the value before it, then it's not decreasing.
 			return false;						//If it isn't decreasing, then it returns false.
 		}
 	}
 	return true;			//This goes after the for loop, because if it makes it through the for loop without returning false, then it must be true.
+}
+
+bool hasAdjacentDuplicates(int values[], int size) {		//This part actually defines the function
+	for (int i = 1; i < size; i++) {			//This for loop runs through each value in the array. It starts at 1 because otherwise, element 0 would be compared to element -1, which doesn't exist.
+		if (values[i] == values[(i - 1)]) {		//If one element of the array is equal to the value before it, then there's adjacent duplicates
+			return true;						//If there are adjacent duplicates, it returns true.
+		}
+	}
+	return false;			//This goes after the for loop, because if it makes it through the for loop without returning true, then it must be false.
 }
