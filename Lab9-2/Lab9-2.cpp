@@ -3,7 +3,7 @@ Jaden Ryan
 4/2/2026
 
 Program Description: Generate an array of integers, and check if they are sorted increasing or decreasing,
-and checks if there are duplicates, adjacent or not.
+and checks if there are duplicates, adjacent or not. 
 */
 #include<iostream>
 using namespace std;
